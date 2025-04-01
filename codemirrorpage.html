@@ -62,7 +62,7 @@
         </select>
 
         <!-- Поле для редактора -->
-        <textarea id="editor">// Напишите код здесь...</textarea>
+        <textarea id="editor"></textarea>
 
         <!-- Кнопка для получения кода -->
         <button onclick="getCode()">Получить код</button>
@@ -80,6 +80,9 @@
             autoCloseBrackets: true   // Автозакрытие скобок
         });
 
+    // Устанавливаем начальный код в редактор
+    editor.setValue(`#include <iostream>\n\nint main() {\n    std::cout << "Hello, CodeMirror!" << std::endl;\n    return 0;\n}`);
+        
         // Функция для смены языка
         document.getElementById("language").addEventListener("change", function() {
             var selectedMode = this.value;
