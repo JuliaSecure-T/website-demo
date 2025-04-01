@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeMirror Редактор</title>
+
+    <!-- CodeMirror: Основные стили -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/theme/dracula.min.css"> <!-- Темная тема -->
+
+    <!-- CodeMirror: Основные скрипты -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/addon/edit/closebrackets.min.js"></script>
+
+    <!-- CodeMirror: Поддержка языков -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/mode/php/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/mode/go/go.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #282a36;
+            color: #f8f8f2;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .CodeMirror {
+            border: 1px solid #44475a;
+            border-radius: 5px;
+            height: 400px;
+        }
+        select, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🌟 CodeMirror Редактор</h2>
+
+        <!-- Выпадающий список для выбора языка -->
+        <label for="language">Выберите язык:</label>
+        <select id="language">
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="clike">C++ / Java</option>
+            <option value="php">PHP</option>
+            <option value="go">Go</option>
+        </select>
+
+        <!-- Поле для редактора -->
+        <textarea id="editor">// Напишите код здесь...</textarea>
+
+        <!-- Кнопка для получения кода -->
+        <button onclick="getCode()">Получить код</button>
+
+        <p id="output"></p>
+    </div>
+
+    <script>
+        // Инициализация редактора CodeMirror
+        var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+            lineNumbers: true,        // Номера строк
+            mode: "javascript",       // Язык по умолчанию
+            theme: "dracula",         // Темная тема
+            matchBrackets: true,      // Подсветка парных скобок
+            autoCloseBrackets: true   // Автозакрытие скобок
+        });
+
+        // Функция для смены языка
+        document.getElementById("language").addEventListener("change", function() {
+            var selectedMode = this.value;
+            editor.setOption("mode", selectedMode);
+        });
+
+        // Функция для получения кода
+        function getCode() {
+            var code = editor.getValue();
+            document.getElementById("output").innerText = "Ваш код:\n" + code;
+        }
+    </script>
+
+</body>
+</html>
